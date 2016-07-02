@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #Variables Generales
-decimales="100"
-numeroArestar="4"
+decimales="100" #Cantidad de decimales máxima permitida
+numeroArestar="4" #Número al que se le quiere restar PI
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
