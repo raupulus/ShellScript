@@ -61,6 +61,7 @@ while :
 				PI=$({ echo -n "scale=$entrada;"; seq 1 2 200 | xargs -n1 -I{} echo '(16*(1/5)^{}/{}-4*(1/239)^{}/{})';} | paste -sd-+ | bc -l)
 				echo -e "$azulC El número PI con$rojoC $entrada$azulC decimales:"
 				echo -e "$verdeC$PI"
+				echo ""
 				echo -e "$rojoC Pulsa INTRO para volver$gris"
 			else
 				clear
