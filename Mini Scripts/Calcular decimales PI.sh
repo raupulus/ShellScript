@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Variables Generales
-decimales="100"#Cantidad de decimales máxima permitida
+decimales="100" #Cantidad de decimales máxima permitida
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
@@ -59,8 +59,8 @@ while :
 			clear;
 			if [ $entrada -le $decimales ]; then
 				PI=$({ echo -n "scale=$entrada;"; seq 1 2 200 | xargs -n1 -I{} echo '(16*(1/5)^{}/{}-4*(1/239)^{}/{})';} | paste -sd-+ | bc -l)
-				echo "El número PI con $entrada decimales:"
-				echo "$PI"
+				echo -e "$azulC El número PI con$rojoC $entrada$azulC decimales:"
+				echo -e "$verdeC$PI"
 				echo -e "$rojoC Pulsa INTRO para volver$gris"
 			else
 				clear
