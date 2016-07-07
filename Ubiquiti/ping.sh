@@ -25,3 +25,9 @@ parpadeoOFF="\E[0m"
 resaltar="\E[7m"
 
 clear
+
+echo -e "$rojoC La duración de esta prueba son$amarillo 10$rojoC segundos"
+echo -e "$azulC Comenzando prueba:$grisC"
+sleep 1
+echo -e ""
+sleep 2
