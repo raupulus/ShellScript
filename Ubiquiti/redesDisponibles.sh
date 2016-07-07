@@ -3,6 +3,8 @@
 #Variables Generales
 IP=$(cat ./ip.config)
 ubiquiti="root@$IP"
+contarRedes="ssh $ubiquiti iwlist ath0 scanning | grep -c ESSID"
+listarRedes="ssh $ubiquiti iwlist ath0 scanning | grep -oE '\".*'"
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
@@ -31,3 +33,7 @@ clear
 echo -e "$rojoC Conectando a la IP:$amarillo $IP"
 echo -e "$azulC Comenzando escaneo de redes$grisC"
 sleep 1
+echo -e "$rojoC Se han encontrado:$amarillo $($contarRedes)$rojoC redes$grisC"
+sleep 2
+echo -e "$azulC Redes listadas a continuación:$grisC"
+echo -e "$amarillo $($listarRedes)$grisC"
