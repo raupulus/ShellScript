@@ -1,6 +1,8 @@
 #!/bin/bash
 
 #Variables Generales
+IP=$(cat ./ip.config)
+ubiquiti="root@$IP"
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
