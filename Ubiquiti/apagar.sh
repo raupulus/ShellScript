@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #Variables Generales
-
+IP=$(cat ./ip.config)
+ubiquiti="root@$IP"
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
@@ -27,3 +28,9 @@ resaltar="\E[7m"
 
 clear
 
+
+echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
+echo -e "$azulC Apagando:$grisC"
+sleep 1
+#echo -e "$(ssh $ubiquiti halt) $grisC"
+echo ""
