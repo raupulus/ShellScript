@@ -1,6 +1,9 @@
 #!/bin/bash
 
 #Variables Generales
+IP=$(cat ./ip.config)
+PING="ping -q -c12 $IP"
+FILTRO="grep packets"
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
@@ -26,8 +29,8 @@ resaltar="\E[7m"
 
 clear
 
-echo -e "$rojoC La duración de esta prueba son$amarillo 10$rojoC segundos"
+echo -e "$rojoC La duración de esta prueba es aproximadamente$amarillo 10$rojoC segundos"
 echo -e "$azulC Comenzando prueba:$grisC"
 sleep 1
-echo -e ""
-sleep 2
+echo -e "$amarillo $($PING | $FILTRO) $grisC"
+echo ""
