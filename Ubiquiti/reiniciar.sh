@@ -2,6 +2,7 @@
 
 #Variables Generales
 IP=$(cat ./ip.config)
+ubiquiti="root@$IP"
 
 ##### CONSTANTES COLORES #####
 negro="\033[0;30m"
@@ -27,6 +28,22 @@ resaltar="\E[7m"
 
 clear
 
-
-
-echo $IP
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+echo -e "$azulC Espere un momento mientras conecta."
+sleep 1
+clear
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+echo -e "$azulC Espere un momento mientras conecta.."
+sleep 1
+clear
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+echo -e "$azulC Espere un momento mientras conecta..."
+sleep 1
+clear
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+echo -e "$azulC Espere un momento mientras conecta...."
+clear
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+ssh $ubiquiti reboot
+echo -e "$azulC Se ha enviado la petición de reinicio"
+echo -e "$verdeC Comando ejecutado: ssh $amarillo $ubiquiti reboot $grisC"
