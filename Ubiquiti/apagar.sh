@@ -32,5 +32,21 @@ clear
 echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
 echo -e "$azulC Apagando:$grisC"
 sleep 1
-#echo -e "$(ssh $ubiquiti halt) $grisC"
+echo -e "$(ssh $ubiquiti halt) $grisC"
 echo ""
+clear
+echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
+echo -e "$amarillo APAGANDO"
+sleep 1
+clear
+echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
+echo -e "$amarillo APAGANDO."
+sleep 1
+clear
+echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
+echo -e "$amarillo APAGANDO..$grisC"
+sleep 1
+clear
+echo -e "$rojoC Conectando para apagar el dispositivo$amarillo UBIQUITI"
+echo -e "$amarillo APAGANDO...$grisC"
+sleep 1
