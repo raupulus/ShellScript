@@ -27,3 +27,7 @@ parpadeoOFF="\E[0m"
 resaltar="\E[7m"
 
 clear
+
+echo -e "$rojoC Conectando a la IP:$amarillo $IP"
+echo -e "$azulC Comenzando escaneo de redes$grisC"
+sleep 1
