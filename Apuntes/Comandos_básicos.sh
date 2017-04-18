@@ -23,3 +23,41 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+x=$verde
+y=$rojo
+
+
+
+#############################
+##         BÁSICOS         ##
+#############################
+echo -e "$azul Comandos básicos de BASH"
+echo ""
+echo -e "$x !!$y Repetir último comando"
+echo -e "$x  $y "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#FINAL --> Limpia color:
+echo -e "$gris"
