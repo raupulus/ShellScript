@@ -17,10 +17,10 @@ while :
 	do
 
 		echo ""
-		echo -e "<1> Entrar al modo edición de este script"
-		echo -e "<2> Envía commitea los cambios en este repositorio"
-		echo -e "<3> Subir cambios al repositorio"
-		echo -e "<0> Salir del programa"
+		echo -e "$rojo <1>$verde Entrar al modo edición de este script$gris"
+		echo -e "$rojo <2>$verde Envía commitea los cambios en este repositorio$gris"
+		echo -e "$rojo <3>$verde Subir cambios al repositorio$gris"
+		echo -e "$rojo <0>$verde Salir del programa$gris"
 		echo ""
 
 		read opcion
