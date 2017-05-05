@@ -15,15 +15,15 @@ cd $DIR_TRABAJO
 
 while :
 	do
-
+		clear
 		echo ""
 		echo -e "$rojo <1>$verde Entrar al modo edición de este script$gris"
-		echo -e "$rojo <2>$verde Envía commitea los cambios en este repositorio$gris"
+		echo -e "$rojo <2>$verde Commit con los cambios en este repositorio$gris"
 		echo -e "$rojo <3>$verde Subir cambios al repositorio$gris"
 		echo -e "$rojo <0>$verde Salir del programa$gris"
 		echo ""
 
-		read opcion
+		read -p "Opción elegida + [ENTER]: " opcion
 		case $opcion in
 			1)
 				nano fryntiz-menu.sh
