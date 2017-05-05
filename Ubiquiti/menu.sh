@@ -2,6 +2,7 @@
 function Ubiquiti_menu() {
 	echo -e "$rojo Menú principal de Ubiquiti$gris"
 	sleep 1s
+	cd $DIR_TRABAJO/Ubiquiti
 
 	while true :
 		do
@@ -21,9 +22,9 @@ function Ubiquiti_menu() {
 				1) echo -e "$amarillo Inserta la IP de la antena Ubiquiti:$gris"
 				   read ip_ubiquiti
 				   echo $ip_ubiquiti > $DIR_TRABAJO/Ubiquiti/ip.config;;
-				2) sh $DIR_TRABAJO/Ubiquiti/apagar.sh&;;
+				2) sh apagar.sh&;;
 				3) sh $DIR_TRABAJO/Ubiquiti/encender.sh&;;
-				4) sh $DIR_TRABAJO/Ubiquiti/ping.sh;;
+				4) sh ping.sh;;
 				5) sh $DIR_TRABAJO/Ubiquiti/redesDisponibles.sh&;;
 				6) sh $DIR_TRABAJO/Ubiquiti/reiniciar.sh&;;
 				0) break;;

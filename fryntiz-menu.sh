@@ -111,11 +111,11 @@ while true; do
 	read principal
 
 	case $principal in
-		1) editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
-		2) Apuntes_menu;; #Abre el menú Apuntes
-		3) MiniScripts_menu;; #Abre el menú Mini Scripts
-		4) Pentesting_menu;; #Abre el menú Pentesting
-		5) Ubiquiti_menu;; #Abre el menú Ubiquiti
+		1) clear; editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
+		2) clear; Apuntes_menu;; #Abre el menú Apuntes
+		3) clear; MiniScripts_menu;; #Abre el menú Mini Scripts
+		4) clear; Pentesting_menu;; #Abre el menú Pentesting
+		5) clear; Ubiquiti_menu;; #Abre el menú Ubiquiti
 		0) exit 1;; #Salir del programa
 		*) echo -e "$amarillo Entrada no válida$gris";;
 	esac
