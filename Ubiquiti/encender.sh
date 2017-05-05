@@ -1,0 +1,3 @@
+#COMPROBAR COMANDO PARA EL WOL
+#wakeonlan -p7 -i 192.168.0.252 68:72:51:27:36:F1
+#wakeonlan -p9 -i 192.168.0.252 68:72:51:27:36:F1
