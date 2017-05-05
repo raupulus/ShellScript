@@ -1,7 +1,17 @@
 #!/bin/bash
 
-#VARIABLES
-DIR_TRABAJO="/home/fryntiz/1_GIT/3-Fryntiz/ShellScript"
+#######################################
+# ###     Raúl Caro Pastorino     ### #
+## ##                             ## ##
+### # https://github.com/fryntiz/ # ###
+## ##                             ## ##
+# ###       www.fryntiz.es        ### #
+#######################################
+
+############################
+##   Constantes Colores   ##
+############################
+amarillo="\033[1;33m"
 rojo="\033[1;31m"
 verde="\033[1;32m"
 magenta="\033[1;35m"
@@ -9,12 +19,26 @@ azul="\033[1;34m"
 blanco="\033[1;37m"
 gris="\033[0;37m"
 
-#Versión
-VERSION=cat version
+#############################
+##   Variables Generales   ##
+#############################
+DIR_TRABAJO="/home/fryntiz/1_GIT/3-Fryntiz/ShellScript"
 
 #Entrar en la ruta de trabajo
 cd $DIR_TRABAJO
 
+#Versión
+VERSION=$(cat version)
+
+echo -e "
+$rojo
+            #############################
+            ## $amarillo$VERSION$rojo ##
+            #############################
+$gris
+"
+
+sleep 4
 while :
 	do
 		clear
