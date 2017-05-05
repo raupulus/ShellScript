@@ -1,10 +1,12 @@
 #!/bin/bash
 #Monitor de temperatura
 clear
-while [ 0 -le 1 ]
+while true :
 do
 	time sensors
-	sleep 3s
-	echo -e "Tiempo encendido --> " ${uptime}
+	echo ""
+	echo -e "Tiempo encendido --> " $(uptime)
+	echo ""
+	sleep 7s
 	clear
 done
