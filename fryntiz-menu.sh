@@ -57,6 +57,7 @@ function editar() {
 		do
 			clear
 			echo ""
+			echo -e "$azul ############# MENÚ EDITAR #############"
 			echo -e "$rojo <1>$verde Commit con los cambios en este repositorio$gris"
 			echo -e "$rojo <2>$verde Subir cambios al repositorio$gris"
 			echo -e "$rojo <3>$verde Editar este script$gris"
@@ -72,8 +73,9 @@ function editar() {
 			case $opcion in
 				1) echo "Introduce el comentario para el commit"
 				   read comentario
-				   git add $DIR_TRABAJO/*
-				   git commit -m "$comentario" $DIR_TRABAJO
+				   cd $DIR_TRABAJO
+				   git add *
+				   git commit -m "$comentario"
 				   ;;
 				2) time git push;;
 				3) nano -w $DIR_TRABAJO/fryntiz-menu.sh;;
@@ -97,12 +99,14 @@ function editar() {
 ############################
 while true; do
 	clear
-	echo -e "$rojo<1>$verde Editar scripts$gris"
-	echo -e "$rojo<2>$verde Menú Apuntes$gris"
-	echo -e "$rojo<3>$verde Menú Mini Scripts$gris"
-	echo -e "$rojo<4>$verde Menú Pentesting$gris"
-	echo -e "$rojo<5>$verde Menú Ubiquiti$gris"
-	echo -e "$rojo<0>$verde Salir del programa$gris"
+	echo ""
+	echo -e "$azul ############# MENÚ PRINCIPAL #############"
+	echo -e "$rojo <1>$verde Editar scripts$gris"
+	echo -e "$rojo <2>$verde Menú Apuntes$gris"
+	echo -e "$rojo <3>$verde Menú Mini Scripts$gris"
+	echo -e "$rojo <4>$verde Menú Pentesting$gris"
+	echo -e "$rojo <5>$verde Menú Ubiquiti$gris"
+	echo -e "$rojo <0>$verde Salir del programa$gris"
 
 	read principal
 
