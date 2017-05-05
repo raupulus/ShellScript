@@ -1,4 +1,5 @@
 #!/bin/bash
-function ubiquiti_menu() {
-	echo -e "$rojo Menú principal de ubiquiti$gris"
+function Ubiquiti_menu() {
+	echo -e "$rojo Menú principal de Ubiquiti$gris"
+	sleep 3s
 	}

@@ -27,17 +27,17 @@ DIR_TRABAJO="/home/fryntiz/1_GIT/3-Fryntiz/ShellScript"
 #############################
 ##    ARCHIVOS EXTERNOS    ##
 #############################
-source $DIR_TRABAJO/Ubiquiti/menu.sh
 source $DIR_TRABAJO/Apuntes/menu.sh
 source $DIR_TRABAJO/MiniScripts/menu.sh
 source $DIR_TRABAJO/Pentesting/menu.sh
+source $DIR_TRABAJO/Ubiquiti/menu.sh
 
 #############################
 ##         VERSIÓN         ##
 #############################
 #Limpia pantalla para mostrar la versión un instante
 clear
-VERSION=$(cat version)
+VERSION=$(cat $DIR_TRABAJO/version)
 echo -e "
 $rojo
             #############################
@@ -63,6 +63,7 @@ function editar() {
 			echo -e "$rojo <4>$verde Editar menú Apuntes$gris"
 			echo -e "$rojo <5>$verde Editar menú Mini Scripts$gris"
 			echo -e "$rojo <6>$verde Editar menú Pentesting$gris"
+			echo -e "$rojo <7>$verde Editar menú Ubiquiti$gris"
 			echo -e "$rojo <x>$amarillo Posiciona en la raíz del repositorio$gris"
 			echo -e "$rojo <0>$verde Volver al menú Principal$gris"
 			echo ""
@@ -71,14 +72,20 @@ function editar() {
 			case $opcion in
 				1) echo "Introduce el comentario para el commit"
 				   read comentario
-				   git add *
-				   git commit -m "$comentario"
+				   git add $DIR_TRABAJO/*
+				   git commit -m "$comentario" $DIR_TRABAJO
 				   ;;
 				2) time git push;;
 				3) nano -w $DIR_TRABAJO/fryntiz-menu.sh;;
 				4) nano -w $DIR_TRABAJO/Apuntes/menu.sh;;
 				5) nano -w $DIR_TRABAJO/MiniScripts/menu.sh;;
 				6) nano -w $DIR_TRABAJO/Pentesting/menu.sh;;
+				7) nano -w $DIR_TRABAJO/Ubiquiti/menu.sh;;
+				x) cd $DIR_TRABAJO
+				   clear
+				   pwd
+				   ls -Al
+				   exit 1;;
 				0) break;;
 				*) echo -e "La opción introducida no es correcta";;
 			esac
@@ -91,17 +98,22 @@ function editar() {
 while true; do
 	clear
 	echo -e "$rojo<1>$verde Editar scripts$gris"
-	echo -e "$rojo<2>$verde Menú Ubiquiti$gris"
+	echo -e "$rojo<2>$verde Menú Apuntes$gris"
+	echo -e "$rojo<3>$verde Menú Mini Scripts$gris"
+	echo -e "$rojo<4>$verde Menú Pentesting$gris"
+	echo -e "$rojo<5>$verde Menú Ubiquiti$gris"
 	echo -e "$rojo<0>$verde Salir del programa$gris"
 
 	read principal
 
 	case $principal in
 		1) editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
-		2) ubiquiti_menu;; #LLama a la función menu.sh en Ubiquiti
+		2) Apuntes_menu;; #Abre el menú Apuntes
+		3) MiniScripts_menu;; #Abre el menú Mini Scripts
+		4) Pentesting_menu;; #Abre el menú Pentesting
+		5) Ubiquiti_menu;; #Abre el menú Ubiquiti
 		0) exit 1;; #Salir del programa
-		*) echo Entrada no válida;;
-
+		*) echo -e "$amarillo Entrada no válida$gris";;
 	esac
 done
 
