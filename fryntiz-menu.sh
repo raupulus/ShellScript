@@ -62,33 +62,20 @@ function editar() {
 			echo -e "$rojo <1>$verde Entrar al modo edición de este script$gris"
 			echo -e "$rojo <2>$verde Commit con los cambios en este repositorio$gris"
 			echo -e "$rojo <3>$verde Subir cambios al repositorio$gris"
-			echo -e "$rojo <0>$verde Salir del programa$gris"
+			echo -e "$rojo <0>$verde Volver al menú Principal$gris"
 			echo ""
 
 			read -p "Opción elegida + [ENTER]: " opcion
 			case $opcion in
-				1)
-					nano fryntiz-menu.sh
-					;;
-
-				2)
-					echo "Introduce el comentario para el commit"
-					read comentario
-					git add *
-					git commit -m "$comentario"
-					;;
-
-				3)
-					time git push
-					;;
-
-				0)
-					break
-					;;
-
-				*)
-					echo -e "La opción introducida no es correcta"
-					;;
+				1) nano fryntiz-menu.sh;;
+				2) echo "Introduce el comentario para el commit"
+				   read comentario
+				   git add *
+				   git commit -m "$comentario"
+				   ;;
+				3) time git push;;
+				0) break;;
+				*) echo -e "La opción introducida no es correcta";;
 			esac
 	done
 }
@@ -98,15 +85,16 @@ function editar() {
 ############################
 while true; do
 	clear
-	echo 1 editar
-	echo 2 ubiquiti
-	echo 0 Salir
+	echo -e "$rojo<1>$verde Editar scripts$gris"
+	echo -e "$rojo<2>$verde Menú Ubiquiti$gris"
+	echo -e "$rojo<0>$verde Salir del programa$gris"
+
 	read principal
 
 	case $principal in
-		1) editar;; #Llamada a la función que contiene el menú para editar, especificada justo arriba
-		2) ubiquiti_menu;;
-		0) exit 1;;
+		1) editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
+		2) ubiquiti_menu;; #LLama a la función menu.sh en Ubiquiti
+		0) exit 1;; #Salir del programa
 		*) echo Entrada no válida;;
 
 	esac
