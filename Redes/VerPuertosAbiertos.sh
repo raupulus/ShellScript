@@ -26,7 +26,7 @@ verde="\033[1;32m"
 
 #Escanea los puertos internos de la red
 echo "Puertos en Local"
-nmap -p 1-65535 localhost
+nmap -p 1-65535 -A -v localhost
 
 
 #Escanear según la ip del propio equipo
@@ -36,5 +36,9 @@ echo "Puertos desde la red"
 #nmap -p 1-65535 $ip
 
 
-
-
+################## IDEAS DE FUTURO ########################
+<<COMMENT
+Mostrar tabla con información clara tanto desde punto de vista local como remoto
+Mostrar de forma clara cada puerto abierto
+Mostrar de forma clara el sistema operativo
+COMMENT
