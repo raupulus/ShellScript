@@ -27,16 +27,27 @@ PUERTO_INICIAL=21
 PUERTO_FINAL=22
 IP=localhost
 
-#Muestra el número de puerto abierto
-PUERTO="nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f1"
-
-#Muestra el tipo de puerto UTP o TCP
-TIPO="nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f2"
+#function escanear($i) {
+#	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
+#}
 
 #Escanea los puertos internos de la red
 echo -e "Buscando puertos abiertos en modo Local"
-echo "`eval $PUERTO` tipo de puerto `eval $TIPO`"
+for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
+do
+	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
+	echo "Puerto abierto --> `eval $PUERTO`"
+done
 
+#Muestra el número de puerto abierto
+#PUERTO=`nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f1 | tr -s ' '`
+
+#Muestra el tipo de puerto UTP o TCP
+#TIPO=`nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f2`
+
+#echo $PUERTO
+
+#echo "El puerto es ${PUERTO[0]} y el tipo es ${TIPO[0]}"
 
 
 
@@ -45,7 +56,13 @@ echo "`eval $PUERTO` tipo de puerto `eval $TIPO`"
 #Esto devuelve los puertos que son visibles desde fuera
 #Los puertos desde fuera pueden ser distintos a los de localhost
 echo "Puertos desde la red"
-#nmap -p 1-65535 $ip
+echo -e "Buscando puertos abiertos en modo Local"
+for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
+do
+	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
+	echo "Puerto abierto --> `eval $PUERTO`"
+done
+
 
 
 ################## IDEAS DE FUTURO ########################
