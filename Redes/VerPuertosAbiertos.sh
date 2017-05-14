@@ -39,21 +39,14 @@ do
 	echo "Puerto abierto --> `eval $PUERTO`"
 done
 
-#Muestra el número de puerto abierto
-#PUERTO=`nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f1 | tr -s ' '`
-
-#Muestra el tipo de puerto UTP o TCP
-#TIPO=`nmap -p $PUERTO_INICIAL'-'$PUERTO_FINAL -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]* | cut -d '/' -f2`
-
-#echo $PUERTO
-
-#echo "El puerto es ${PUERTO[0]} y el tipo es ${TIPO[0]}"
-
-
-
-
 #Escanear según la ip del propio equipo
-#Esto devuelve los puertos que son visibles desde fuera
+#El siguiente comando mostrará todas las IP existentes con ifconfig
+#Estoy limitando a la primera, que es la correspondiente a eth0
+
+#DEBIDO A LO ANTERIOR DESCRITO, NO FUNCIONARÁ AÚN POR WIFI
+
+IP=`ifconfig | grep -e 'eth' -e 'wlan' -e 'inet ' | tr -s ' ' | cut -d ' ' -f3 | cut -d ':' -f2 | grep -e "^[0-9]*.[0-9]*.[0-9]*.[0-9]*$"  | grep -v -e ^127.0.0.1$ -e ^0.0.0.0$ -e ^127.0.0.1$ -e ^255.255.255.255$ | head -n 1`
+
 #Los puertos desde fuera pueden ser distintos a los de localhost
 echo "Puertos desde la red"
 echo -e "Buscando puertos abiertos en modo Local"
