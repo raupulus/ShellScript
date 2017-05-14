@@ -23,8 +23,8 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
-PUERTO_INICIAL=21
-PUERTO_FINAL=22 #65535
+PUERTO_INICIAL=0
+PUERTO_FINAL=65535
 IP=localhost
 
 #Escanea los puertos internos de la red
@@ -32,10 +32,10 @@ echo -e "Buscando puertos abiertos en modo Local"
 for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
 do
 	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
-	x=`eval $PUERTO`
+	x=`eval $PUERTO 2>/dev/null`
 	y=`echo $x | cut -d '/' -f2`
 	x=`echo $x | cut -d '/' -f1`
-	if [ $x -eq $i ]; then
+	if [ $x -eq $i 2>/dev/null ]; then
 		echo "Puerto abierto --> $x protocolo --> $y"
 	fi
 done
@@ -52,7 +52,7 @@ do
 	x=`eval $PUERTO`
 	y=`echo $x | cut -d '/' -f2`
 	x=`echo $x | cut -d '/' -f1`
-	if [ $x -eq $i ]; then
+	if [ $x -eq $i 2>/dev/null]; then
 		echo "Puerto abierto --> $x protocolo --> $y"
 	fi
 done
@@ -60,5 +60,9 @@ done
 
 ################## IDEAS DE FUTURO ########################
 <<COMMENT
-
+Redirigir errores a 2>/dev/null para no mostrar salidas feas
+Contador para avisar cada 100 direcciones comprobadas
+Contador que almacena la cantidad de puertos abiertos
+Sacar el sistema operativo
+Sacar la dirección mac
 COMMENT
