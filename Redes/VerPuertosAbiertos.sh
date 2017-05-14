@@ -23,8 +23,8 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
-PUERTO_INICIAL=0
-PUERTO_FINAL=65535
+PUERTO_INICIAL=21
+PUERTO_FINAL=22 #65535
 IP=localhost
 
 #Escanea los puertos internos de la red
@@ -32,7 +32,12 @@ echo -e "Buscando puertos abiertos en modo Local"
 for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
 do
 	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
-	echo "Puerto abierto --> `eval $PUERTO`"
+	x=`eval $PUERTO`
+	y=`echo $x | cut -d '/' -f2`
+	x=`echo $x | cut -d '/' -f1`
+	if [ $x -eq $i ]; then
+		echo "Puerto abierto --> $x protocolo --> $y"
+	fi
 done
 
 #Estoy limitando a la primera, que es la correspondiente a eth0
@@ -44,7 +49,12 @@ echo -e "Buscando puertos abiertos en modo Local"
 for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
 do
 	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
-	echo "Puerto abierto --> `eval $PUERTO`"
+	x=`eval $PUERTO`
+	y=`echo $x | cut -d '/' -f2`
+	x=`echo $x | cut -d '/' -f1`
+	if [ $x -eq $i ]; then
+		echo "Puerto abierto --> $x protocolo --> $y"
+	fi
 done
 
 
