@@ -29,7 +29,7 @@ IP=localhost
 
 #Escanea los puertos internos de la red
 echo -e "Buscando puertos abiertos en modo Local"
-for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
+for (( i = $PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
 do
 	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
 	x=`eval $PUERTO 2>/dev/null`
@@ -46,13 +46,13 @@ IP=`ifconfig | grep -e 'eth' -e 'wlan' -e 'inet ' | tr -s ' ' | cut -d ' ' -f3 |
 #Los puertos desde fuera pueden ser distintos a los de localhost
 echo "Puertos desde la red"
 echo -e "Buscando puertos abiertos en modo Local"
-for (( i = PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
+for (( i = $PUERTO_INICIAL; i<=$PUERTO_FINAL; i++))
 do
 	PUERTO="nmap -p $i -A -v $IP | grep Discovered | tr -s ' ' | cut -d ' ' -f4 | grep ^[0-9]*"
 	x=`eval $PUERTO`
 	y=`echo $x | cut -d '/' -f2`
 	x=`echo $x | cut -d '/' -f1`
-	if [ $x -eq $i 2>/dev/null]; then
+	if [ $x -eq $i 2>/dev/null ]; then
 		echo "Puerto abierto --> $x protocolo --> $y"
 	fi
 done
