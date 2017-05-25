@@ -19,3 +19,8 @@ TMP=`find  -type f -exec wc -l {} \; | cut -d " " -f 1`
 for i in $TMP; do
 	TOTAL=$(( $TOTAL + $i ))
 done
+
+#Mostrar resultado
+echo "El total es $TOTAL"
+
+exit 0
