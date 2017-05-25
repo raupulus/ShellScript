@@ -14,3 +14,8 @@ TOTAL=0
 
 #Cuenta todas las líneas y las agrego a un array
 TMP=`find  -type f -exec wc -l {} \; | cut -d " " -f 1`
+
+#Bucle para recorrer todos los valores de $TMP
+for i in $TMP; do
+	TOTAL=$(( $TOTAL + $i ))
+done
