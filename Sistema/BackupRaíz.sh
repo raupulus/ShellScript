@@ -25,6 +25,15 @@
 ############################
 ##        VARIABLES       ##
 ############################
+USERNAME="$(whoami)"
 DIR_EXCLUIDOS=""
 ARCHIVOS_EXCLUIDOS=""
+PASSWORD=""
+TMP=""
+NOMBRE_BACKUP="Backup-$(date +%Y%m%d).tar"
 
+# Comprobar que está ejecutándose como root
+if [ ! $USERNAME == "root" ]; then
+	echo "Un backup para la raíz del sistema requiere ser usuario \"root\""
+	exit 1
+fi
