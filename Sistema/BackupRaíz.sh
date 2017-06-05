@@ -16,16 +16,19 @@
 # una enorme seguridad en el archivo final resultante cifrado.
 
 # Para recuperar un backup previo --> 7z x Backup-*.tar.7z && tar xf Backup-*.tar
+# Es necesario crear directorios omitidos:
+# sudo mkdir /home /media /mnt /proc /run/log /run/media /sys /tmp /usr/src /var/log /var/tmp
+# sudo chmod 755 /tmp && sudo chmod 777 -R /tmp/*
 
 ############################
 ##        VARIABLES       ##
 ############################
 USERNAME="$(whoami)"
-DIR_EXCLUIDOS=("/home" "/usr/src" "/tmp" "/var/log" "/mnt" "/media" "/proc")
-ARCHIVOS_EXCLUIDOS=("lost+found" "Trash" "Cache" "cache" "trash")
+NOMBRE_BACKUP="Backup-$(date +%Y%m%d).tar"
+DIR_EXCLUIDOS=("/Backup" "/home" "/media" "/mnt" "/proc" "/run/log" "/run/media" "/sys" "/tmp" "/usr/src" "/var/log" "/var/tmp")
+ARCHIVOS_EXCLUIDOS=("Backup*" ".cache" "cache" "lost+found" "Trash" "Cache" ".trash" "trash")
 PASSWORD="none"
 TMP=""
-NOMBRE_BACKUP="Backup-$(date +%Y%m%d).tar"
 RUTA_DESTINO=""
 
 clear
@@ -33,7 +36,7 @@ clear
 read -p "Introduce donde guardar el Backup --> " RUTA_DESTINO
 
 # Comprobar que está ejecutándose como root
-if [ ! $USERNAME == "root" ]; then
+if [ $USERNAME != "root" ]; then
 	echo "Un backup para la raíz del sistema requiere ser usuario \"root\""
 	exit 1
 fi 2> /dev/null
@@ -81,10 +84,10 @@ echo "Comenzará en cuanto pulses intro"
 read TMP
 
 # Empaquetar en tar guardándolo dentro de /tmp
-tar -cf /tmp/$NOMBRE_BACKUP -C / $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
+tar -cpf /tmp/$NOMBRE_BACKUP -C /* $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
 
 # Comprimir y cifrar en 7z (-mhe=on activa cifrado de encabezado, más seguridad)
-7z a $RUTA_DESTINO/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD /tmp/$NOMBRE_BACKUP
+#7z a $RUTA_DESTINO/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD /tmp/$NOMBRE_BACKUP
 
 # Borrar empaquetado TAR de /tmp
-rm /tmp/$NOMBRE_BACKUP
+#rm /tmp/$NOMBRE_BACKUP
