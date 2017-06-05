@@ -23,26 +23,25 @@
 USERNAME="$(whoami)"
 DIR_EXCLUIDOS=("/home" "/usr/src" "/tmp" "/var/log" "/mnt" "/media" "/proc")
 ARCHIVOS_EXCLUIDOS=("lost+found" "Trash" "Cache" "cache" "trash")
-PASSWORD="1"
-TMP="1"
+PASSWORD="none"
+TMP=""
 NOMBRE_BACKUP="Backup-$(date +%Y%m%d).tar"
-RUTA_DESTINO="/tmp"
+RUTA_DESTINO=""
 
 clear
+
+read -p "Introduce donde guardar el Backup --> " RUTA_DESTINO
 
 # Comprobar que está ejecutándose como root
 if [ ! $USERNAME == "root" ]; then
 	echo "Un backup para la raíz del sistema requiere ser usuario \"root\""
 	exit 1
-fi
+fi 2> /dev/null
 
 # Pedir contraseña de cifrado
-echo "Introduce la contraseña para cifrar el Backup"
-# read PASSWORD
-
-# Volver a introducir contraseña de cifrado
-echo "Vuelve a introducir la contraseña de cifrado"
-# read TMP
+echo "Introduce la contraseña de cifrado con números y letras"
+read -p "Contraseña para cifrar --> " PASSWORD
+read -p "Repite la Contraseña --> " TMP
 
 # Comprobar que PASSWORD y TMP son iguales
 if [ $PASSWORD != $TMP ]; then
@@ -78,8 +77,14 @@ echo
 echo "Directorios --> $DIR_EXCLUIDOS"
 echo
 
-#Empaquetar en tar guardándolo dentro de /tmp
-echo "tar -cf /tmp/$NOMBRE_BACKUP -C / $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS"
+echo "Comenzará en cuanto pulses intro"
+read TMP
 
-#Comprimir y cifrar en 7z (-mhe=on activa cifrado de encabezado)
-echo "7z a /tmp/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD $RUTA_DESTINO/$NOMBRE_BACKUP.7z"
+# Empaquetar en tar guardándolo dentro de /tmp
+tar -cf /tmp/$NOMBRE_BACKUP -C / $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
+
+# Comprimir y cifrar en 7z (-mhe=on activa cifrado de encabezado, más seguridad)
+7z a $RUTA_DESTINO/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD /tmp/$NOMBRE_BACKUP
+
+# Borrar empaquetado TAR de /tmp
+rm /tmp/$NOMBRE_BACKUP
