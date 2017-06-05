@@ -24,7 +24,7 @@
 ##        VARIABLES       ##
 ############################
 USERNAME="$(whoami)"
-NOMBRE_BACKUP="Backup-$(date +%Y%m%d).tar"
+NOMBRE_BACKUP="Backup_RAIZ-$(date +%Y%m%d).tar"
 DIR_EXCLUIDOS=("/Backup" "/home" "/media" "/mnt" "/proc" "/run/log" "/run/media" "/sys" "/tmp" "/usr/src" "/var/log" "/var/tmp" "/var/cache/apt-build")
 ARCHIVOS_EXCLUIDOS=("Backup*" ".cache" "cache" "lost+found" "Trash" "Cache" ".trash" "trash")
 PASSWORD="none"
