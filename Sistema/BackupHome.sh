@@ -8,6 +8,8 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Este script permite realizar una copia de seguridad de nuestro directorio home
+
 ############################
 ##        VARIABLES       ##
 ############################
