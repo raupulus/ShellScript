@@ -15,8 +15,8 @@
 ############################
 USERNAME="$(whoami)"
 NOMBRE_BACKUP="Backup_HOME-$(date +%Y%m%d).tar"
-DIR_EXCLUIDOS=("0-MOUNT" "1_GIT" "1-MOUNT" "2_Bases_de_Datos" "3_Librerías" "4_Programas" "5_Entornos_de_Trabajo" "6_Máquinas_Virtuales" "7_Mis_Proyectos" "8_Backups" "9_Dropbox" "10_GoogleDrive" "11_CloudStation" "12_Pentesting" "13_Compartido_Smartphone" "14_CloudStation_Compartido" "Descargas" "Documentos" "Imágenes" "NHCK" "PlayOnLinux's virtual drives" "RastroArtesanal" "repositorio" "TEMPORAL" "temporal" "tmp" "Vídeos" ".PlayOnLinux" ".local/share/Trash*") # Nombres de directorios excluidos dentro del home
-ARCHIVOS_EXCLUIDOS=("Backup_HOME-*" ".cache" "cache" "lost+found" "Trash" "Cache" ".trash" "trash")
+DIR_EXCLUIDOS=("0-MOUNT" "1_GIT" "1-MOUNT" "2_Bases_de_Datos" "3_Librerías" "4_Programas" "5_Entornos_de_Trabajo" "6_Máquinas_Virtuales" "7_Mis_Proyectos" "8_Backups" "9_Dropbox" "10_GoogleDrive" "11_CloudStation" "12_Pentesting" "13_Compartido_Smartphone" "14_CloudStation_Compartido" "Descargas" "Documentos" "Imágenes" "NHCK" "PlayOnLinux's virtual drives" "RastroArtesanal" "repositorio" "TEMPORAL" "temporal" "tmp" "Vídeos" ".cache" ".local/share/Trash" ".PlayOnLinux" ".thumbnails") # Nombres de directorios excluidos dentro del home
+ARCHIVOS_EXCLUIDOS=("Backup_HOME-*" ".cache" "cache" "lost+found" "Trash" "Cache" ".trash" "trash" ".Trash-1000")
 PASSWORD="none"
 TMP=""
 RUTA_DESTINO=""
