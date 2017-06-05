@@ -84,12 +84,12 @@ echo "Comenzará en cuanto pulses intro"
 read TMP
 
 # Empaquetar en tar guardándolo dentro de /tmp
-tar -cpf /Backup/$NOMBRE_BACKUP -C /* $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
+tar -cpf $RUTA_DESTINO/$NOMBRE_BACKUP -C /* $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
 
 # Comprimir y cifrar en 7z (-mhe=on activa cifrado de encabezado, más seguridad)
-7z a $RUTA_DESTINO/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD /Backup/$NOMBRE_BACKUP
+7z a $RUTA_DESTINO/$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD $RUTA_DESTINO/$NOMBRE_BACKUP
 
 # Borrar empaquetado TAR de /tmp
-#rm /tmp/$NOMBRE_BACKUP
+rm $RUTA_DESTINO/$NOMBRE_BACKUP
 
 exit 0
