@@ -70,15 +70,20 @@ for SOY_EL_USUARIO in ${USUARIOS[*]}; do
 	# Rellenar lista de exclusiones para directorios
 	for i in ${DIR_EXCLUIDOS[*]}
 	do
-		TMP="$TMP --exclude=$i"
+		TMP="$TMP --exclude=\"./$i\""
 	done
 
 	# Añade los valores de TMP de nuevo a DIR_EXCLUIDOS en forma de cadena bien formada
 	DIR_EXCLUIDOS=$TMP
 	TMP="" # Resetea la variable temporal
 
+echo $DIR_EXCLUIDOS
+read 
+
+cd "/home/$SOY_EL_USUARIO"
+
 	# Empaquetar en tar
-	tar -cvf $RUTA_DESTINO/$SOY_EL_USUARIO$NOMBRE_BACKUP -C /home/$SOY_EL_USUARIO /home/$SOY_EL_USUARIO/. $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
+	tar -cvf $RUTA_DESTINO/$SOY_EL_USUARIO$NOMBRE_BACKUP -C /home/$SOY_EL_USUARIO . $DIR_EXCLUIDOS $ARCHIVOS_EXCLUIDOS
 
 	# Comprimir y cifrar en 7z (-mhe=on activa cifrado de encabezado, más seguridad)
 	7z a $RUTA_DESTINO/$SOY_EL_USUARIO$NOMBRE_BACKUP.7z -mhe=on -p$PASSWORD $RUTA_DESTINO/$SOY_EL_USUARIO$NOMBRE_BACKUP
