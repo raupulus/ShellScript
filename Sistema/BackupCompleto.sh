@@ -17,11 +17,11 @@
 USERNAME="$(whoami)"
 NOMBRE_BACKUP="Backup_$(date +%Y%m%d).tar.bz2"
 
-# Nombres de directorios excluidos dentro del home, ruta relativa dentro del home de usuario
+# Nombres de directorios excluidos. Se comienza desde la raíz (/)
 DIR_EXCLUIDOS=("proc" "mnt" "sys" "media" "tmp" "var/log" ".cache" "root/.cache" "root/.local/share/Trash")
 
-# Archivos o directorios excluidos mientras coincida el nombre, estando en cualquier ruta del usuario
-ARCHIVOS_EXCLUIDOS=("Backup_*" ".cache" "cache" "lost+found" "Trash" "Cache" ".trash" "trash" ".Trash-1000" ".thumbnails" "TEMPORAL" "temporal" "tmp")
+# Archivos o directorios excluidos mientras coincida el nombre
+ARCHIVOS_EXCLUIDOS=("Backup_*" ".cache" "lost+found" "Trash" "Cache" ".trash" ".Trash-1000" ".Trash-1001" ".thumbnails" "TEMPORAL" "temporal" "tmp")
 
 TMP=""
 RUTA_DESTINO=""
