@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# -*- ENCODING: UTF-8 -*-
 #######################################
 # ###     Raúl Caro Pastorino     ### #
 ## ##                             ## ##
@@ -53,71 +53,71 @@ sleep 4
 # Esta función permite editar el script principal
 # Incluye hacer commit y subir a los repositorios
 function editar() {
-	while true :
-		do
-			clear
-			echo ""
-			echo -e "$azul ############# MENÚ EDITAR #############"
-			echo -e "$rojo <1>$verde Commit con los cambios en este repositorio$gris"
-			echo -e "$rojo <2>$verde Subir cambios al repositorio$gris"
-			echo -e "$rojo <3>$verde Editar este script$gris"
-			echo -e "$rojo <4>$verde Editar menú Apuntes$gris"
-			echo -e "$rojo <5>$verde Editar menú Mini Scripts$gris"
-			echo -e "$rojo <6>$verde Editar menú Pentesting$gris"
-			echo -e "$rojo <7>$verde Editar menú Ubiquiti$gris"
-			echo -e "$rojo <x>$amarillo Posiciona en la raíz del repositorio$gris"
-			echo -e "$rojo <0>$verde Volver al menú Principal$gris"
-			echo ""
+    while true :
+        do
+            clear
+            echo ""
+            echo -e "$azul ############# MENÚ EDITAR #############"
+            echo -e "$rojo <1>$verde Commit con los cambios en este repositorio$gris"
+            echo -e "$rojo <2>$verde Subir cambios al repositorio$gris"
+            echo -e "$rojo <3>$verde Editar este script$gris"
+            echo -e "$rojo <4>$verde Editar menú Apuntes$gris"
+            echo -e "$rojo <5>$verde Editar menú Mini Scripts$gris"
+            echo -e "$rojo <6>$verde Editar menú Pentesting$gris"
+            echo -e "$rojo <7>$verde Editar menú Ubiquiti$gris"
+            echo -e "$rojo <x>$amarillo Posiciona en la raíz del repositorio$gris"
+            echo -e "$rojo <0>$verde Volver al menú Principal$gris"
+            echo ""
 
-			read -p "Opción elegida + [ENTER]: " opcion
-			case $opcion in
-				1) echo "Introduce el comentario para el commit"
-				   read comentario
-				   cd $DIR_TRABAJO
-				   git add *
-				   git commit -m "$comentario"
-				   ;;
-				2) time git push;;
-				3) nano -w $DIR_TRABAJO/fryntiz-menu.sh;;
-				4) nano -w $DIR_TRABAJO/Apuntes/menu.sh;;
-				5) nano -w $DIR_TRABAJO/MiniScripts/menu.sh;;
-				6) nano -w $DIR_TRABAJO/Pentesting/menu.sh;;
-				7) nano -w $DIR_TRABAJO/Ubiquiti/menu.sh;;
-				x) cd $DIR_TRABAJO
-				   clear
-				   pwd
-				   ls -Al
-				   exit 1;;
-				0) break;;
-				*) echo -e "La opción introducida no es correcta";;
-			esac
-	done
+            read -p "Opción elegida + [ENTER]: " opcion
+            case $opcion in
+                1) echo "Introduce el comentario para el commit"
+                   read comentario
+                   cd $DIR_TRABAJO
+                   git add *
+                   git commit -m "$comentario"
+                   ;;
+                2) time git push;;
+                3) nano -w $DIR_TRABAJO/fryntiz-menu.sh;;
+                4) nano -w $DIR_TRABAJO/Apuntes/menu.sh;;
+                5) nano -w $DIR_TRABAJO/MiniScripts/menu.sh;;
+                6) nano -w $DIR_TRABAJO/Pentesting/menu.sh;;
+                7) nano -w $DIR_TRABAJO/Ubiquiti/menu.sh;;
+                x) cd $DIR_TRABAJO
+                   clear
+                   pwd
+                   ls -Al
+                   exit 1;;
+                0) break;;
+                *) echo -e "La opción introducida no es correcta";;
+            esac
+    done
 }
 
 ############################
 ##     MENÚ PRINCIPAL     ##
 ############################
 while true; do
-	clear
-	echo ""
-	echo -e "$azul ############# MENÚ PRINCIPAL #############"
-	echo -e "$rojo <1>$verde Editar scripts$gris"
-	echo -e "$rojo <2>$verde Menú Apuntes$gris"
-	echo -e "$rojo <3>$verde Menú Mini Scripts$gris"
-	echo -e "$rojo <4>$verde Menú Pentesting$gris"
-	echo -e "$rojo <5>$verde Menú Ubiquiti$gris"
-	echo -e "$rojo <0>$verde Salir del programa$gris"
+    clear
+    echo ""
+    echo -e "$azul ############# MENÚ PRINCIPAL #############"
+    echo -e "$rojo <1>$verde Editar scripts$gris"
+    echo -e "$rojo <2>$verde Menú Apuntes$gris"
+    echo -e "$rojo <3>$verde Menú Mini Scripts$gris"
+    echo -e "$rojo <4>$verde Menú Pentesting$gris"
+    echo -e "$rojo <5>$verde Menú Ubiquiti$gris"
+    echo -e "$rojo <0>$verde Salir del programa$gris"
 
-	read principal
+    read principal
 
-	case $principal in
-		1) clear; editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
-		2) clear; Apuntes_menu;; #Abre el menú Apuntes
-		3) clear; MiniScripts_menu;; #Abre el menú Mini Scripts
-		4) clear; Pentesting_menu;; #Abre el menú Pentesting
-		5) clear; Ubiquiti_menu;; #Abre el menú Ubiquiti
-		0) exit 1;; #Salir del programa
-		*) echo -e "$amarillo Entrada no válida$gris";;
-	esac
+    case $principal in
+        1) clear; editar;; #Llama a la función que contiene el menú para editar, especificada justo arriba
+        2) clear; Apuntes_menu;; #Abre el menú Apuntes
+        3) clear; MiniScripts_menu;; #Abre el menú Mini Scripts
+        4) clear; Pentesting_menu;; #Abre el menú Pentesting
+        5) clear; Ubiquiti_menu;; #Abre el menú Ubiquiti
+        0) exit 1;; #Salir del programa
+        *) echo -e "$amarillo Entrada no válida$gris";;
+    esac
 done
 
