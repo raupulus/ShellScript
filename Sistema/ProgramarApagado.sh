@@ -18,55 +18,52 @@ while :
         clear
 
         echo ""
-        echo -e "             $amarillo Apache2 $rojo   $version"
+        echo -e "             $amarillo Programar Apagado o Reinicio $rojo   $version"
         echo ""
-        echo -e "   $rojo 1)  $verde Deshabilitar del inicio"
-        echo -e "   $rojo 2)  $verde Habilitar en el inicio"
-        echo -e "   $rojo 3)  $verde Apagar"
-        echo -e "   $rojo 4)  $verde Encender"
-        echo -e "   $rojo 5)  $verde Reiniciar"
-        #echo -e "   $rojo 6)  $verde Reinicio Seguro"
+        echo -e "   $rojo 1)  $verde Apagar el equipo a una hora concreta"
+        echo -e "   $rojo 2)  $verde Reiniciar el equipo a una hora concreta"
+        echo -e "   $rojo 3)  $verde Apagar el equipo en XX minutos"
+        echo -e "   $rojo 4)  $verde Reiniciar el equipo en XX minutos"
+        echo -e "   $rojo 5)  $verde Cancelar cualquier apagado/reinicio que esté programado"
         echo -e "   $rojo 0)  $verde Volver atrás$gris"
         echo ""
 
     read -p "  → " OPCION
     case $OPCION in
 
-        1)  # Deshabilitar del inicio
+        1)  # Apagar el equipo a una hora concreta
             clear
-            sudo systemctl disable apache2
+            read -p "Introduce la hora de apagado (HH:MM) → " $hora
+            sudo shutdown -h $hora
             read -p "Pulsa una tecla para continuar" foo
             continue;;
 
-        2)  # Habilitar al inicio
+        2)  # Reiniciar el equipo a una hora concreta
             clear
-            sudo systemctl enable apache2
+            read -p "Introduce la hora de apagado (HH:MM) → " $hora
+            sudo shutdown -r $hora
             read -p "Pulsa una tecla para continuar" foo
             continue;;
 
-        3)  # Apagar
+        3)  # Apagar el equipo en XX minutos
             clear
-            sudo systemctl stop apache2
+            read -p "Introduce la hora de apagado (HH:MM) → " $minutos
+            sudo shutdown -h $minutos
             read -p "Pulsa una tecla para continuar" foo
             continue;;
 
-        4)  # Encender
+        4)  # Reiniciar el equipo en XX minutos
             clear
-            sudo systemctl start apache2
+            read -p "Introduce la hora de apagado (HH:MM) → " $minutos
+            sudo shutdown -r $minutos
             read -p "Pulsa una tecla para continuar" foo
             continue;;
 
-        5)  # Reiniciar
+        5)  # Cancelar cualquier apagado/reinicio que esté programado
             clear
-            sudo systemctl restart apache2
+            sudo shutdown -c
             read -p "Pulsa una tecla para continuar" foo
             continue;;
-
-        6)  # Reinicio Seguro
-            clear
-            read -p "Pulsa una tecla para continuar" foo
-            continue;;
-
 
         0)  # Volver Atrás
             clear
