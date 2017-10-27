@@ -9,7 +9,7 @@
 
 function obtener_IPs() {
     clear
-    read -p "Introduce el nombre del archivo → " input
+    read -p 'Introduce el nombre del archivo → ' input
     if [ -f $input ]
     then
         echo "Resultados de $input"
