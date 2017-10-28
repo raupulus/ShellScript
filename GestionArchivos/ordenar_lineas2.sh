@@ -11,8 +11,7 @@ function ordenar() {
     then
         sort $input > tmp_resultado_ordenado.txt
         rm $input
-        cp tmp_resultado_ordenado.txt  $input
-        rm tmp_resultado_ordenado.txt
+        mv tmp_resultado_ordenado.txt  $input
     fi
 }
 
