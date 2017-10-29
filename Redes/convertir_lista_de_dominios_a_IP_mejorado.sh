@@ -23,7 +23,7 @@ function obtener_IPs() {
             resultado=$(nslookup $var | tail -n2 | head -n1 | cut -d' ' -f2)
             echo "$1 → $resultado"
     fi
-
+    exit
 }
 
 function generar_resultado() {
@@ -39,8 +39,9 @@ function generar_resultado() {
             echo "$y → $resultado"
             echo $resultado >> resultado.txt 2>> /dev/null
         done
+        exit
     fi
 }
 
-obtener_IPs "https://www.google.es/"
+obtener_IPs "prueba.txt"
 
