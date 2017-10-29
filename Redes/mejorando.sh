@@ -21,7 +21,7 @@ function obtener_IPs() {
     else
             var=$(echo $1 | cut -d'/' -f3)
             resultado=$(nslookup $var | tail -n2 | head -n1 | cut -d' ' -f2)
-            return "$1 → $resultado"
+            echo "$1 → $resultado"
     fi
 
 }
@@ -42,6 +42,5 @@ function generar_resultado() {
     fi
 }
 
-var=$(obtener_IPs "https://www.google.es/")
+obtener_IPs "https://www.google.es/"
 
-echo $var
