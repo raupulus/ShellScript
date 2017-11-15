@@ -31,3 +31,68 @@ verde="\033[1;32m"
 #############################
 ##   Variables Generales   ##
 #############################
+
+
+# Preparar directorios, se crean si no existiesen
+if [ ! -d ~/.local/opt ]
+then
+    mkdir -p ~/.local/opt
+fi
+
+if [ ! -d ~/.local/bin ]
+then
+    mkdir -p ~/.local/bin
+fi
+
+if [ ! -d ~/.local/share/applications ]
+then
+    mkdir -p ~/.local/share/applications
+fi
+
+
+# Firefox Quantum Edition
+function firefox_quantumr() {
+
+    function instalar() {
+        # Desempaquetar Firefox-Quantum_amd64.tar.bz2
+        mkdir -p /tmp/Firefox-Quantum-Developer_amd64 2>> /dev/null
+        tar -xjvf /tmp/Firefox-Quantum-Developer_amd64.tar.bz2 -C /tmp/Firefox-Quantum-Developer_amd64 2>> /dev/null
+
+        # Mover archivo extraido a su ubicación final
+        mv /tmp/Firefox-Quantum-Developer_amd64/firefox ~/.local/opt/Firefox_Quantum_Developer 2>> /dev/null
+
+        # Crear enlaces de usuario y permisos de ejecución
+        echo "$HOME/.local/opt/Firefox_Quantum_Developer/firefox - P Firefox-Quantum" > ~/.local/bin/firefox-quantum
+        # ln -s ~/.local/opt/Firefox_Quantum_Developer/firefox ~/.local/bin/firefox-quantum 2>> /dev/null
+        chmod +x ~/.local/bin/firefox-quantum
+    }
+
+    if [ -f ~/.local/bin/firefox-quantum ]
+    then
+        echo -e "$verde Ya esta$rojo Firefox Quantum Developer Edition$verde instalado en el equipo, omitiendo paso$gris"
+    # Comprueba que no está el archivo descargado en este directorio
+elif [ ! -f /tmp/Firefox-Quantum-Developer_amd64.tar.bz2 ]
+    then
+        REINTENTOS=50
+        echo -e "$verde Descargando$rojo Firefox Quantum Developer Edition$gris"
+        for (( i=1; i<=$REINTENTOS; i++ ))
+        do
+            rm -f /tmp/Firefox-Quantum-Developer_amd64.tar.bz 2>> /dev/null
+            wget --show-progress -r -A tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=es-ES' -O /tmp/Firefox-Quantum-Developer_amd64.tar.bz2 && break
+        done
+        echo -e "$verde Preparando para instalar$rojo Firefox Quantum Developer Edition$gris"
+
+        instalar
+    else
+        instalar
+    fi
+
+
+
+    function accesos_Directos() {
+        # Copiar acceso directo
+        cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
+    }
+
+
+}
