@@ -87,12 +87,32 @@ elif [ ! -f /tmp/Firefox-Quantum-Developer_amd64.tar.bz2 ]
         instalar
     fi
 
-
-
     function accesos_Directos() {
+        # Acceso directo
+        desktop='
+            [Desktop Entry]
+            Name=Firefox Quantum
+            Name[es]=Firefox Quantum
+            Comment=Browse the World Wide Web
+            Comment[es]=Navegue por la web
+            GenericName=Web Browser
+            GenericName[es]=Navegador web
+            X-GNOME-FullName=Firefox Quantum Web Browser
+            X-GNOME-FullName[es]=Navegador web Firefox Quantum
+            Exec=.local/bin/firefox-quantum %u
+            Terminal=false
+            X-MultipleArgs=false
+            Type=Application
+            Icon=firefox-developer-icon
+            Categories=Network;WebBrowser;
+            MimeType=text/html;text/xml;application/xhtml+xml;application/xml;application/vnd.mozilla.xul+xml;application/rss+xml;application/rdf+xml;image/gif;image/jpeg;image/png;x-scheme-handler/http;x-scheme-handler/https;
+            StartupWMClass=Firefox-Quantum
+            StartupNotify=true
+            Name[es_ES]=firefox-quantum
+        '
         # Copiar acceso directo
-        cp Accesos_Directos/firefox-quantum.desktop ~/.local/share/applications/ 2>> /dev/null
+        cat desktop > ~/.local/share/applications/firefox-quantum.desktop 2>> /dev/null
     }
 
-
+    accesos_Directos
 }
