@@ -13,6 +13,9 @@
 # Como pasos adicionales crea entradas para llamarse desde comando y además
 # crea archivos .desktop para ser ejecutados como qualquier aplicación
 
+# Debes tener en cuenta que este script está pensado para instalarlo al usuario
+# actual con el que estais ejecutándolo.
+
 ############################
 ##   Constantes Colores   ##
 ############################
