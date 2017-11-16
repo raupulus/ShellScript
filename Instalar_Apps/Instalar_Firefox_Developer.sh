@@ -111,7 +111,7 @@ elif [ ! -f /tmp/Firefox-Developer_amd64.tar.bz2 ]
             Name[es_ES]=firefox-developer
         '
         # Copiar acceso directo
-        cat desktop > ~/.local/share/applications/firefox-developer.desktop 2>> /dev/null
+        cat $desktop > ~/.local/share/applications/firefox-developer.desktop 2>> /dev/null
     }
 
     accesos_Directos
