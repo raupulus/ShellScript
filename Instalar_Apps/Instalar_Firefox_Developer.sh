@@ -116,3 +116,6 @@ elif [ ! -f /tmp/Firefox-Developer_amd64.tar.bz2 ]
 
     accesos_Directos
 }
+
+# Llamada a la función
+firefox_developer
