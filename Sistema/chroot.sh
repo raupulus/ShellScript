@@ -11,6 +11,18 @@
 #############################
 ##   Variables Generales   ##
 #############################
+# Preparar jaula y puntos de montajes
+
+function montarJaula() {
+    # Si está cifrado
+    #cryptsetup open --type luks /dev/sda2 sda2_crypt
+    #cryptsetup open --type luks /dev/sda3 sda3_crypt
+    echo "Tienes que tener montada las particiones, todavía no implementado"
+
+    # Montar
+    # mount /dev/mapper/sda3_crypt /$jaula
+    # mount /dev/sda1 /mnt/boot/
+}
 
 # Enjaular en la ruta indicada
 function enjaular() {
