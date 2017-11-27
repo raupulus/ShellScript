@@ -8,10 +8,14 @@
 # ###       www.fryntiz.es        ### #
 #######################################
 
+# Script portable que te permite montar un entorno enjaulado con chroot solo
+# con llamar a la función "montar_chroot()"
+# de forma que solo contempla el montaje de 1 partición para la jaula y además
+# permite desmontar todo lo realizado al terminar.
+
 #############################
 ##   Variables Generales   ##
 #############################
-# Preparar jaula y puntos de montajes
 
 function montar_chroot() {
 
