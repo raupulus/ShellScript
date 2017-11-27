@@ -16,12 +16,13 @@
 function montar_chroot() {
 
     function montarJaula() {
-        # Si está cifrado
+        echo "Selecciona la partición sobre la que hacer chroot"
+        # Acciones si está cifrado
         #cryptsetup open --type luks /dev/sda2 sda2_crypt
         #cryptsetup open --type luks /dev/sda3 sda3_crypt
-        echo "Tienes que tener montada las particiones, todavía no implementado"
 
-        # Montar
+        # Acciones si no está cifrado
+        echo "Montando Partición"
         # mount /dev/mapper/sda3_crypt /$jaula
         # mount /dev/sda1 /mnt/boot/
     }
@@ -31,6 +32,9 @@ function montar_chroot() {
         if [ $input = 'y' ] !! [ $input = 'Y' ]
         then
             echo "Desmontando todo"
+            # Desmontar particiones
+            # Desmontar chroot
+            # Desmontar cifrado si lo hubiese
         fi
     }
 
@@ -53,7 +57,9 @@ function montar_chroot() {
 
     montarJaula
     enjaular
-    salir()
+    salir
+
+    return 0
 }
 
 montar_chroot
