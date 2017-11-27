@@ -13,33 +13,47 @@
 #############################
 # Preparar jaula y puntos de montajes
 
-function montarJaula() {
-    # Si está cifrado
-    #cryptsetup open --type luks /dev/sda2 sda2_crypt
-    #cryptsetup open --type luks /dev/sda3 sda3_crypt
-    echo "Tienes que tener montada las particiones, todavía no implementado"
+function montar_chroot() {
 
-    # Montar
-    # mount /dev/mapper/sda3_crypt /$jaula
-    # mount /dev/sda1 /mnt/boot/
+    function montarJaula() {
+        # Si está cifrado
+        #cryptsetup open --type luks /dev/sda2 sda2_crypt
+        #cryptsetup open --type luks /dev/sda3 sda3_crypt
+        echo "Tienes que tener montada las particiones, todavía no implementado"
+
+        # Montar
+        # mount /dev/mapper/sda3_crypt /$jaula
+        # mount /dev/sda1 /mnt/boot/
+    }
+
+    function salir() {
+        read -p "¿Deseas desmontar todo? s/N → " input
+        if [ $input = 'y' ] !! [ $input = 'Y' ]
+        then
+            echo "Desmontando todo"
+        fi
+    }
+
+    # Enjaular en la ruta indicada
+    function enjaular() {
+        while [ $jaula = '' ]
+        do
+            clear
+            read -p "Introduce la ruta donde enjaularte (¿/mnt?)" jaula
+        done
+
+        mount -t proc proc /$jaula/proc/
+        mount -t sysfs sys /$jaula/sys/
+        mount -o bind /dev/ /$jaula/dev
+        mount -t devpts pts /$jaula/dev/pts
+
+        chroot /$jaula/ /bin/bash
+        #export PS1="Enjaulado → (chroot) $PS1"
+    }
+
+    montarJaula
+    enjaular
+    salir()
 }
 
-# Enjaular en la ruta indicada
-function enjaular() {
-    while [ $jaula == '' ]
-    do
-        clear
-        read -p "Introduce la ruta donde enjaularte (¿/mnt?)" jaula
-    done
-
-    mount -t proc proc /$jaula/proc/
-    mount -t sysfs sys /$jaula/sys/
-    mount -o bind /dev/ /$jaula/dev
-    mount -t devpts pts /$jaula/dev/pts
-
-    chroot /$jaula/ /bin/bash
-    #export PS1="Enjaulado → (chroot) $PS1"
-}
-
-montarJaula
-enjaular
+montar_chroot
