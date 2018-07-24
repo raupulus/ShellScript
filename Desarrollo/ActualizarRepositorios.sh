@@ -34,10 +34,10 @@ VERSION='0.0.1'  ## Primera versión del script
 LOGERROR='/tmp/chrooterrores.log'  ## Archivo donde almacenar errores
 
 ## MODO
-MODE='relax'  ## relax|interactive|agresive
 # if MODE = relax → solo hace git pull
 # if MODE = interactive → pregunta si hacer git pull o descartar cambios
 # if MODE = agresive → descarta todos los cambios y luego actualiza
+MODE='relax'  ## relax|interactive|agresive
 
 ###########################
 ##       VARIABLES       ##
@@ -86,7 +86,7 @@ updateRepo() {
 
     # if MODE = relax → solo hace git pull
     if [[ $MODE = 'relax' ]]; then
-        git pull
+        git pull || echo "Error al actualizar $dir" >> "$LOGERROR"
     fi
 
     # if MODE = interactive → pregunta si hacer git pull o descartar cambios
@@ -114,15 +114,18 @@ updateRepo() {
 ## ya que en este caso supondrá que es un repositorio y lo actualiza.
 ##
 comenzar() {
-    ## cd $DIRGIT
+    cd $DIRGIT || exit
 
-    ## Listo todos los directorios y si es un directorio entra y hace git pull
-    #for → if -d $dir
-    # if -d $dir/.git
-    updateRepo "$dir"
+    for dir in *; do
+        if [[ -d "$dir" ]] && [[ -d "${dir}/.git" ]]; then
+            echo -e "Actualizando $dir"
+            updateRepo "$dir"
+        fi
+    done
 }
 
 inputDir "$1"
 comenzar
 
+echo -e "Script completado"
 exit 0
