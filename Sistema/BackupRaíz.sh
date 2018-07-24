@@ -1,28 +1,46 @@
-#!/bin/bash
-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
-
-# El objetivo de este script es crear una copia de seguridad de todo el sistema
-# menos del directorio home que contiene a los usuarios ya que es común que se
-# realice más a menudo el backup de usuarios (o al revés) además este script
-# empaqueta primero en formato "tar" y luego comprime y cifra en formato "7z"
-# garantizando privilegios, permisos de usuario y grupo además de garantizar
-# una enorme seguridad en el archivo final resultante cifrado.
-
-# Para recuperar un backup previo --> 7z x Backup-*.tar.7z && tar xf Backup-*.tar
-# Es necesario crear directorios omitidos:
-# sudo mkdir /home /media /mnt /proc /run/log /run/media /sys /tmp /usr/src /var/log /var/tmp
-# sudo chmod 755 /tmp && sudo chmod 777 -R /tmp/*
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
 ############################
-##        VARIABLES       ##
+##     INSTRUCCIONES      ##
 ############################
+## El objetivo de este script es crear una copia de seguridad de todo el sistema
+## menos del directorio home que contiene a los usuarios ya que es común que se
+## realice más a menudo el backup de usuarios (o al revés) además este script
+## empaqueta primero en formato "tar" y luego comprime y cifra en formato "7z"
+## garantizando privilegios, permisos de usuario y grupo además de garantizar
+## una enorme seguridad en el archivo final resultante cifrado.
+##
+## Para recuperar un backup previo --> 7z x Backup-*.tar.7z && tar xf
+## Backup-*.tar
+## Es necesario crear directorios omitidos:
+## sudo mkdir /home /media /mnt /proc /run/log /run/media /sys /tmp /usr/src
+## /var/log /var/tmp
+## sudo chmod 755 /tmp && sudo chmod 777 -R /tmp/*
+
+############################
+##       CONSTANTES       ##
+############################
+AM="\033[1;33m"  ## Color Amarillo
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
+###########################
+##       VARIABLES       ##
+###########################
 USERNAME="$(whoami)"
 NOMBRE_BACKUP="Backup_RAIZ-$(date +%Y%m%d).tar"
 DIR_EXCLUIDOS=("/Backup" "/home" "/media" "/mnt" "/proc" "/run/log" "/run/media" "/sys" "/tmp" "/usr/src" "/var/log" "/var/tmp" "/var/cache/apt-build")
@@ -31,6 +49,9 @@ PASSWORD="none"
 TMP=""
 RUTA_DESTINO=""
 
+###########################
+##       FUNCIONES       ##
+###########################
 clear
 
 read -p "Introduce donde guardar el Backup --> " RUTA_DESTINO

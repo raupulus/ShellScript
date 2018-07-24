@@ -17,7 +17,8 @@
 ##     INSTRUCCIONES      ##
 ############################
 ## Preparar jaula y puntos de montajes, este script contempla que siempre
-## será una partición de que se compone el sistema
+## está cifrada la partición de raíz y siempre hay 2 particiones:
+## boot y raíz
 ##
 ## Si recibe "-d" o "--desmontar" se desmonta toda la jaula
 
@@ -32,20 +33,38 @@ LOGERROR='/tmp/chrooterrores.log'  ## Archivo donde almacenar errores
 ###########################
 ##       VARIABLES       ##
 ###########################
-## Punto de montaje, directorio en el que montar la jaula
-JAULA='/mnt'
+## Punto de montaje, directorio dentro de /mnt
+JAULA='/mnt/Fedora'
+
+## Partición con el arranque para /boot
+BOOT='/dev/sda1'
 
 ## Partición con el sistema para /
 RAIZ='/dev/sda2'
+
+## Nombre de la partición cifrada
+LUKSNAME='FEDORA'
+
+## Nombre que da luks por defecto al automontar partición cifrada
+LUKS='luks-xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx'
 
 ##
 ## Construye la jaula con los datos dados
 ##
 montarJaula() {
-    sudo umount $RAIZ
+    ## Desmonta posibles montajes
+    sudo umount /dev/mapper/$LUKS
+    sudo umount $BOOT
+
+    ## Cierra Cifrado
+    sudo cryptsetup luksClose /dev/mapper/$LUKS
+
+    ## Abre Cifrado
+    sudo cryptsetup open --type luks $RAIZ $LUKSNAME
 
     ## Montar estructura de la jaula
-    sudo mount $RAIZ $JAULA
+    sudo mount /dev/mapper/${LUKSNAME} $JAULA
+    sudo mount $BOOT ${JAULA}/boot
 }
 
 ## Enjaular en la ruta indicada
@@ -71,6 +90,7 @@ desmontar() {
     sudo umount ${JAULA}/sys/
     sudo umount ${JAULA}/dev/pts
     sudo umount ${JAULA}/dev
+    sudo umount ${JAULA}/boot
     sudo umount ${JAULA}
 }
 

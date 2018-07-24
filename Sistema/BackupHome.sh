@@ -1,27 +1,50 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
-
-# Este script permite realizar una copia de seguridad de nuestro directorio home
-# Este Backup resultará en un archivo cifrado para cada usuario
-# Al tener una copia de seguirdad para cada usuario es más cómodo recuperar un dato
-# para ese usuario sin que tenga que ver los datos del resto de usuarios
-# Al empaquetar primero en TAR se mantienen permisos y privilegios de usuario:grupo
-# Al cifrar en 7z se logra impedir que se vea que contiene y por su puesto el acceso no autorizado
+############################
+##     INSTRUCCIONES      ##
+############################
+## Este script permite realizar una copia de seguridad de nuestro directorio home
+##
+## Este Backup resultará en un archivo cifrado para cada usuario
+##
+## Al tener una copia de seguirdad para cada usuario es más cómodo recuperar
+## un dato
+## para ese usuario sin que tenga que ver los datos del resto de usuarios
+##
+## Al empaquetar primero en TAR se mantienen permisos y privilegios de
+## usuario:grupo
+##
+## Al cifrar en 7z se logra impedir que se vea que contiene y por su puesto
+## el acceso no autorizado
 
 # El funcionamiento del script comienza por introducir donde guardar el backup
 # se recomienda guardar el backup en almacenamiento externo a los directorios de usuario (HDD-USB por ejemplo)
 # Después se pedirá introducir 2 veces la contraseña de cifrado
 
 ############################
-##        VARIABLES       ##
+##       CONSTANTES       ##
 ############################
+AM="\033[1;33m"  ## Color Amarillo
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
+###########################
+##       VARIABLES       ##
+###########################
 USERNAME="$(whoami)"
 USUARIOS=`ls /home`
 NOMBRE_BACKUP="Backup_HOME-$(date +%Y%m%d).tar"
@@ -35,7 +58,9 @@ ARCHIVOS_EXCLUIDOS=("Backup_HOME-*" ".cache" "cache" "lost+found" "Trash" "Cache
 PASSWORD=""
 TMP=""
 RUTA_DESTINO=""
-
+###########################
+##       FUNCIONES       ##
+###########################
 clear
 
 read -p "Introduce donde guardar el Backup --> " RUTA_DESTINO

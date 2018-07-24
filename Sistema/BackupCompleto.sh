@@ -1,15 +1,39 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# -*- ENCODING: UTF-8 -*-
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+############################
+##     INSTRUCCIONES      ##
+############################
+## Este script permite realizar una copia de seguridad de nuestro sistema completo
+## El resultado será un archivo comprimido y empaquetado en .tar.bz2
 
-# Este script permite realizar una copia de seguridad de nuestro sistema completo
-# El resultado será un archivo comprimido y empaquetado en .tar.bz2
+############################
+##       CONSTANTES       ##
+############################
+AM="\033[1;33m"  ## Color Amarillo
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
+###########################
+##       VARIABLES       ##
+###########################
+
+###########################
+##       FUNCIONES       ##
+###########################
 
 ############################
 ##        VARIABLES       ##
