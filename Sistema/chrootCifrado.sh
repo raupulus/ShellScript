@@ -78,7 +78,7 @@ enjaular() {
     sudo mount -o bind   /dev/ ${JAULA}/dev
     sudo mount -t devpts pts   ${JAULA}/dev/pts
 
-    sudo chroot /mnt/Fedora/ /bin/bash
+    sudo chroot $JAULA /bin/bash
     #export PS1="Enjaulado → (chroot) $PS1"
 }
 
