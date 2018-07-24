@@ -1,16 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      dev@fryntiz.es
+## @web        https://fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-#############################
-##   Variables Generales   ##
-#############################
+############################
+##     INSTRUCCIONES      ##
+############################
+## Gestiona tareas del servidor ssh
+
+############################
+##       CONSTANTES       ##
+############################
+AM="\033[1;33m"  ## Color Amarillo
+RO="\033[1;31m"  ## Color Rojo
+VE="\033[1;32m"  ## Color Verde
+CL="\e[0m"       ## Limpiar colores
+
+###########################
+##       VARIABLES       ##
+###########################
+
+###########################
+##       FUNCIONES       ##
+###########################
 
 # Menu
 while :
@@ -18,15 +40,14 @@ while :
         clear
 
         echo ""
-        echo -e "             $amarillo SSH $rojo   $version"
+        echo -e "             $AM SSH $RO"
         echo ""
-        echo -e "   $rojo 1)  $verde Deshabilitar del inicio"
-        echo -e "   $rojo 2)  $verde Habilitar en el inicio"
-        echo -e "   $rojo 3)  $verde Apagar"
-        echo -e "   $rojo 4)  $verde Encender"
-        echo -e "   $rojo 5)  $verde Reiniciar"
-        #echo -e "   $rojo 6)  $verde Reinicio Seguro"
-        echo -e "   $rojo 0)  $verde Volver atrás$gris"
+        echo -e "   $RO 1)  $VE Deshabilitar del inicio"
+        echo -e "   $RO 2)  $VE Habilitar en el inicio"
+        echo -e "   $RO 3)  $VE Apagar"
+        echo -e "   $RO 4)  $VE Encender"
+        echo -e "   $RO 5)  $VE Reiniciar"
+        echo -e "   $RO 0)  $VE Volver atrás$CL"
         echo ""
 
     read -p "  → " OPCION
@@ -35,38 +56,32 @@ while :
         1)  # Deshabilitar del inicio
             clear
             sudo systemctl disable ssh
-            read -p "Pulsa una tecla para continuar" foo
+            read -p "Pulsa una tecla para continuar" input
             continue;;
 
         2)  # Habilitar al inicio
             clear
             sudo systemctl enable ssh
-            read -p "Pulsa una tecla para continuar" foo
+            read -p "Pulsa una tecla para continuar" input
             continue;;
 
         3)  # Apagar
             clear
             sudo systemctl stop ssh
-            read -p "Pulsa una tecla para continuar" foo
+            read -p "Pulsa una tecla para continuar" input
             continue;;
 
         4)  # Encender
             clear
             sudo systemctl start ssh
-            read -p "Pulsa una tecla para continuar" foo
+            read -p "Pulsa una tecla para continuar" input
             continue;;
 
         5)  # Reiniciar
             clear
             sudo systemctl restart ssh
-            read -p "Pulsa una tecla para continuar" foo
+            read -p "Pulsa una tecla para continuar" input
             continue;;
-
-        6)  # Reinicio Seguro
-            clear
-            read -p "Pulsa una tecla para continuar" foo
-            continue;;
-
 
         0)  # Volver Atrás
             clear
@@ -75,7 +90,7 @@ while :
         *)  # Cualquier otra opción que no sea las anteriores
             clear
             echo ""
-            echo -e "$rojo La opción elegida no es válida$amarillo introduce otra"
-            read -p "Pulsa una tecla para continuar" foo;;
+            echo -e "$RO La opción elegida no es válida$AM introduce otra"
+            read -p "Pulsa una tecla para continuar" input;;
     esac
 done
