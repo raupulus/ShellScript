@@ -19,6 +19,11 @@
 ## Menú principal para instalar aplicaciones desde el que se permite
 ## elegir entre los tipos de aplicaciones a instalar desde un menú
 ## interactivo seleccionando el número que le corresponda
+##
+## No se contemplan subdirectorios (En principio no lo veo necesario)
+## En la ruta de directorio GIT se indica la "ruta" hacia el directorio padre:
+## /ruta/repo/.git
+## ya que se buscará en esa ruta si cada directorio en su interior es un repo.
 
 ###########################
 ##       CONSTANTES       ##
@@ -27,6 +32,12 @@ WORKSCRIPT=$PWD  ## Directorio principal del script
 USER=$(whoami)   ## Usuario que ejecuta el script
 VERSION='0.0.1'  ## Primera versión del script
 LOGERROR='/tmp/chrooterrores.log'  ## Archivo donde almacenar errores
+
+## MODO
+MODE='relax'  ## relax|interactive|agresive
+# if MODE = relax → solo hace git pull
+# if MODE = interactive → pregunta si hacer git pull o descartar cambios
+# if MODE = agresive → descarta todos los cambios y luego actualiza
 
 ###########################
 ##       VARIABLES       ##
@@ -66,5 +77,52 @@ inputDir() {
     return 0
 }
 
+##
+## Recibe la ruta de un repositorio y lo actualiza
+##
+updateRepo() {
+    dir="$1"
+    cd $dir || exit 1
+
+    # if MODE = relax → solo hace git pull
+    if [[ $MODE = 'relax' ]]; then
+        git pull
+    fi
+
+    # if MODE = interactive → pregunta si hacer git pull o descartar cambios
+    ## No implementado modo
+    if [[ $MODE = 'interactive' ]]; then
+        git pull ## Detectar si hay fallos y preguntar:
+        fallos='false'
+        if [[ "$fallos" = 'true' ]]; then
+            echo -e "¿Descartar Cambios?"
+        fi
+    fi
+
+    # if MODE = agresive → descarta todos los cambios y luego actualiza
+    if [[ $MODE = 'agresive' ]]; then
+        git checkout -- .
+        git checkout HEAD
+        git pull
+    fi
+
+    cd $WORKSCRIPT || exit 1
+}
+
+##
+## Recorre todos los directorios comprobando si dentro exite un directorio .git
+## ya que en este caso supondrá que es un repositorio y lo actualiza.
+##
+comenzar() {
+    ## cd $DIRGIT
+
+    ## Listo todos los directorios y si es un directorio entra y hace git pull
+    #for → if -d $dir
+    # if -d $dir/.git
+    updateRepo "$dir"
+}
+
 inputDir "$1"
+comenzar
+
 exit 0
