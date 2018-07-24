@@ -1,69 +1,86 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # -*- ENCODING: UTF-8 -*-
-#######################################
-# ###     Raúl Caro Pastorino     ### #
-## ##                             ## ##
-### # https://github.com/fryntiz/ # ###
-## ##                             ## ##
-# ###       www.fryntiz.es        ### #
-#######################################
+##
+## @author     Raúl Caro Pastorino
+## @copyright  Copyright © 2018 Raúl Caro Pastorino
+## @license    https://wwww.gnu.org/licenses/gpl.txt
+## @email      tecnico@fryntiz.es
+## @web        www.fryntiz.es
+## @github     https://github.com/fryntiz
+## @gitlab     https://gitlab.com/fryntiz
+## @twitter    https://twitter.com/fryntiz
+##
+##             Guía de estilos aplicada:
+## @style      https://github.com/fryntiz/Bash_Style_Guide
 
-# Script portable que te permite montar un entorno enjaulado con chroot solo
-# con llamar a la función "montar_chroot()"
-# de forma que solo contempla el montaje de 1 partición para la jaula y además
-# permite desmontar todo lo realizado al terminar.
+############################
+##     INSTRUCCIONES      ##
+############################
+## Preparar jaula y puntos de montajes, este script contempla que siempre
+## será una partición de que se compone el sistema
+##
+## Si recibe "-d" o "--desmontar" se desmonta toda la jaula
 
-#############################
-##   Variables Generales   ##
-#############################
+############################
+##       CONSTANTES       ##
+############################
+WORKSCRIPT=$PWD  ## Directorio principal del script
+USER=$(whoami)   ## Usuario que ejecuta el script
+VERSION='0.0.1'  ## Primera versión del script
+LOGERROR='/tmp/chrooterrores.log'  ## Archivo donde almacenar errores
 
-function montar_chroot() {
+###########################
+##       VARIABLES       ##
+###########################
+## Punto de montaje, directorio en el que montar la jaula
+JAULA='/mnt'
 
-    function montarJaula() {
-        echo "Selecciona la partición sobre la que hacer chroot"
-        # Acciones si está cifrado
-        #cryptsetup open --type luks /dev/sda2 sda2_crypt
-        #cryptsetup open --type luks /dev/sda3 sda3_crypt
+## Partición con el sistema para /
+RAIZ='/dev/sda2'
 
-        # Acciones si no está cifrado
-        echo "Montando Partición"
-        # mount /dev/mapper/sda3_crypt /$jaula
-        # mount /dev/sda1 /mnt/boot/
-    }
+##
+## Construye la jaula con los datos dados
+##
+montarJaula() {
+    sudo umount $RAIZ
 
-    function salir() {
-        read -p "¿Deseas desmontar todo? s/N → " input
-        if [ $input = 'y' ] !! [ $input = 'Y' ]
-        then
-            echo "Desmontando todo"
-            # Desmontar particiones
-            # Desmontar chroot
-            # Desmontar cifrado si lo hubiese
-        fi
-    }
-
-    # Enjaular en la ruta indicada
-    function enjaular() {
-        while [ $jaula = '' ]
-        do
-            clear
-            read -p "Introduce la ruta donde enjaularte (¿/mnt?)" jaula
-        done
-
-        mount -t proc proc /$jaula/proc/
-        mount -t sysfs sys /$jaula/sys/
-        mount -o bind /dev/ /$jaula/dev
-        mount -t devpts pts /$jaula/dev/pts
-
-        chroot /$jaula/ /bin/bash
-        #export PS1="Enjaulado → (chroot) $PS1"
-    }
-
-    montarJaula
-    enjaular
-    salir
-
-    return 0
+    ## Montar estructura de la jaula
+    sudo mount $RAIZ $JAULA
 }
 
-montar_chroot
+## Enjaular en la ruta indicada
+enjaular() {
+    if [[ $JAULA = '' ]]; then
+        return
+    fi
+
+    sudo mount -t proc   proc  ${JAULA}/proc/
+    sudo mount -t sysfs  sys   ${JAULA}/sys/
+    sudo mount -o bind   /dev/ ${JAULA}/dev
+    sudo mount -t devpts pts   ${JAULA}/dev/pts
+
+    sudo chroot $JAULA /bin/bash
+    #export PS1="Enjaulado → (chroot) $PS1"
+}
+
+##
+## Desmonta la jaula
+##
+desmontar() {
+    sudo umount ${JAULA}/proc/
+    sudo umount ${JAULA}/sys/
+    sudo umount ${JAULA}/dev/pts
+    sudo umount ${JAULA}/dev
+    sudo umount ${JAULA}
+}
+
+if [[ "$1" = '-d' ]] || [[ "$1" = '--desmontar' ]]; then
+    desmontar
+    exit 0
+else
+    montarJaula
+    enjaular
+    exit 0
+fi
+
+exit 1
