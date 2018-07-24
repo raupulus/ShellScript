@@ -106,7 +106,7 @@ updateRepo() {
         git pull
     fi
 
-    cd $WORKSCRIPT || exit 1
+    cd $DIRGIT || exit 1
 }
 
 ##
@@ -117,11 +117,14 @@ comenzar() {
     cd $DIRGIT || exit
 
     for dir in *; do
+        echo -e "Comprobando si ${dir} es un repositorio"
         if [[ -d "$dir" ]] && [[ -d "${dir}/.git" ]]; then
             echo -e "Actualizando $dir"
             updateRepo "$dir"
         fi
     done
+
+    cd $WORKSCRIPT
 }
 
 inputDir "$1"
