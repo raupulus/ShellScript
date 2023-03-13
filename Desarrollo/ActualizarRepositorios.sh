@@ -25,7 +25,7 @@
 ## /ruta/repo/.git
 ## ya que se buscará en esa ruta si cada directorio en su interior es un repo.
 
-###########################
+############################
 ##       CONSTANTES       ##
 ############################
 WORKSCRIPT=$PWD  ## Directorio principal del script
