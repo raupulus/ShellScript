@@ -6,12 +6,12 @@
 ## @license    https://wwww.gnu.org/licenses/gpl.txt
 ## @email      tecnico@fryntiz.es
 ## @web        www.fryntiz.es
-## @github     https://github.com/fryntiz
-## @gitlab     https://gitlab.com/fryntiz
-## @twitter    https://twitter.com/fryntiz
+## @github     https://github.com/raupulus
+## @gitlab     https://gitlab.com/raupulus
+## @twitter    https://twitter.com/raupulus
 ##
 ##             Guía de estilos aplicada:
-## @style      https://github.com/fryntiz/Bash_Style_Guide
+## @style      https://github.com/raupulus/Bash_Style_Guide
 
 ############################
 ##     INSTRUCCIONES      ##
